@@ -12,3 +12,18 @@ object LocalThreatList {
         return entries[domainOrIp]
     }
 }
+
+    private val threats = mapOf(
+        "test-phishing-example.com" to ThreatEntry("PHISHING", 80)
+    )
+
+    fun check(host: String): ThreatEntry? {
+        return threats[host]
+    }
+}
+
+data class ThreatEntry(
+    val category: String,
+    val score: Int
+)
+
