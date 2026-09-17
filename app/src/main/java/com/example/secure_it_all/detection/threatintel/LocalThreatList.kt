@@ -20,7 +20,7 @@ object LocalThreatList {
     fun check(host: String): ThreatEntry? {
         return threats[host]
     }
-}
+
 
 data class ThreatEntry(
     val category: String,
