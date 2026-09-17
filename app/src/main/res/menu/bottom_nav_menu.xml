@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@android:drawable/ic_menu_myplaces"
+        android:title="Home"/>
+    <item
+        android:id="@+id/nav_scanner"
+        android:icon="@android:drawable/ic_menu_crop"
+        android:title="Scanner"/>
+    <item
+        android:id="@+id/nav_apps"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="Apps"/>
+    <item
+        android:id="@+id/nav_rules"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:title="Rules"/>
+    <item
+        android:id="@+id/nav_alerts"
+        android:icon="@android:drawable/ic_dialog_alert"
+        android:title="Alerts"/>
+</menu>

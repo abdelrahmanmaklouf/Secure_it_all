@@ -36,8 +36,7 @@ android {
     }
 }
 
-// REMOVED: The configurations.all { resolutionStrategy { ... } } block has been removed.
-// AGP 9.4.0 cleanly aligns modern dependency constraints automatically for compileSdk 37.
+
 
 dependencies {
     // Jetpack Compose Foundation Toolkit
@@ -46,10 +45,10 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.3.1")
 
     // Core Lifecycle & Activity bindings
-    implementation("androidx.activity:activity-compose:1.10.1") // Reverted safely to your preferred version
+    implementation("androidx.activity:activity-compose:1.10.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
 
-    // Room (FIX: Upgraded versions to fix KSP2 signature bug)
+    // Room
     implementation("androidx.room:room-runtime:2.7.0")
     implementation("androidx.room:room-ktx:2.7.0")
     ksp("androidx.room:room-compiler:2.7.0")
@@ -65,4 +64,5 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended")
 
     implementation(libs.material)
+    implementation("androidx.fragment:fragment-ktx:1.8.4")
 }
