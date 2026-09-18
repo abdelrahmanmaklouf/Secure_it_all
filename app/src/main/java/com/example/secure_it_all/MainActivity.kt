@@ -1,23 +1,39 @@
 package com.example.secure_it_all
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.appcompat.app.AppCompatActivity
 import com.example.secure_it_all.data.database.AppDatabase
-import com.example.secure_it_all.ui.dashboard.DashboardScreen
-import com.example.secure_it_all.ui.dashboard.DashboardViewModel
 
-class MainActivity : ComponentActivity() {
+import com.example.secure_it_all.ui.dashboard.HomeFragment
+import com.example.secure_it_all.ui.scanner.ScannerFragment
+
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
+class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val db = AppDatabase.getInstance(applicationContext)
-        val viewModel = DashboardViewModel(db)
+        setContentView(R.layout.activity_main)
 
-        setContent {
-            DashboardScreen(viewModel)
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, HomeFragment())
+                .commit()
+        }
+
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+
+        bottomNav.setOnItemSelectedListener {
+            val fragment = when (it.itemId) {
+                R.id.nav_home -> HomeFragment()
+                R.id.nav_scanner -> ScannerFragment()
+
+                else -> HomeFragment()
+            }
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, fragment)
+                .commit()
+            true
         }
     }
 }
