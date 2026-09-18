@@ -1,8 +1,10 @@
 <resources>
+
     <style name="Base.Theme.Secure_it_all"
-        parent="android:style/Theme.Material.Light.NoActionBar">
+        parent="Theme.AppCompat.Light.NoActionBar">
     </style>
 
     <style name="Theme.Secure_it_all"
         parent="Base.Theme.Secure_it_all" />
+
 </resources>

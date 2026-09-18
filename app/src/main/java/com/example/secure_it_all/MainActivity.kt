@@ -1,26 +1,39 @@
 package com.example.secure_it_all
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 import com.example.secure_it_all.data.database.AppDatabase
-import com.example.secure_it_all.ui.dashboard.DashboardScreen
-import com.example.secure_it_all.ui.dashboard.DashboardViewModel
-import com.example.secure_it_all.ui.network.NetworkConnectionViewModel
 
-class MainActivity : ComponentActivity() {
+import com.example.secure_it_all.ui.dashboard.HomeFragment
+import com.example.secure_it_all.ui.scanner.ScannerFragment
+
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-        val db = AppDatabase.getInstance(applicationContext)
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, HomeFragment())
+                .commit()
+        }
 
-        val dashboardViewModel = DashboardViewModel(db)
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
 
-        NetworkConnectionViewModel(db)
+        bottomNav.setOnItemSelectedListener {
+            val fragment = when (it.itemId) {
+                R.id.nav_home -> HomeFragment()
+                R.id.nav_scanner -> ScannerFragment()
 
-        setContent {
-            DashboardScreen(dashboardViewModel)
+                else -> HomeFragment()
+            }
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, fragment)
+                .commit()
+            true
         }
     }
 }

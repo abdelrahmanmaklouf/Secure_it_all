@@ -37,7 +37,8 @@ object LocalThreatList {
     }
 
 
-data class ThreatEntry(
-    val category: String,
-    val score: Int
-)
+    data class ThreatEntry(
+        val category: String,
+        val score: Int
+    )
+}
