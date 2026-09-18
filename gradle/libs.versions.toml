@@ -1,9 +1,8 @@
 [versions]
-agp = "9.4.0"
+
 coreKtx = "1.19.0"
-# FIX: Align Kotlin and KSP to the 2.3.x toolchain
-kotlin = "2.3.21"
-ksp = "2.3.7"
+agp = "9.4.0"
+ksp = "2.3.6"
 junit = "4.13.2"
 junitVersion = "1.3.0"
 espressoCore = "3.7.0"
@@ -11,7 +10,7 @@ appcompat = "1.8.0"
 material = "1.14.0"
 activityKtx = "1.13.0"
 constraintlayout = "2.2.2"
-
+composeCompiler = "2.3.21"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -26,5 +25,4 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-# FIX: Add the new Compose Compiler compiler reference
-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "composeCompiler" }
