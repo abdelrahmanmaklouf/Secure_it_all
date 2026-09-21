@@ -10,5 +10,18 @@
         <item name="android:background">@drawable/bg_stat_card</item>
         <item name="android:textSize">14sp</item>
     </style>
-
+    <style name="StatNumber">
+        <item name="android:textSize">26sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_dark</item>
+    </style>
+    <style name="StatLabel">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_dark</item>
+    </style>
+    <style name="StatHint">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/text_muted</item>
+    </style>
 </resources>
