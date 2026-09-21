@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Base.Theme.Secure_it_all"
-        parent="Theme.AppCompat.DayNight.NoActionBar">
+        parent="Theme.MaterialComponents.Light.NoActionBar">
     </style>
 
 </resources>

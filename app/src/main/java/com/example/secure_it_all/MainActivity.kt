@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
 
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
 
         bottomNav.setOnItemSelectedListener {
             val fragment = when (it.itemId) {
