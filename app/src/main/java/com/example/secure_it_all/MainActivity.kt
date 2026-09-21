@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.secure_it_all.data.database.AppDatabase
 
+import com.example.secure_it_all.ui.appmonitor.AppMonitorFragment
 import com.example.secure_it_all.ui.dashboard.HomeFragment
 import com.example.secure_it_all.ui.scanner.ScannerFragment
 
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
             val fragment = when (it.itemId) {
                 R.id.nav_home -> HomeFragment()
                 R.id.nav_scanner -> ScannerFragment()
+                R.id.nav_apps -> AppMonitorFragment()
 
                 else -> HomeFragment()
             }
