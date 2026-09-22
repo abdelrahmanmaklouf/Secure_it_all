@@ -10,8 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.secure_it_all.R
 import com.example.secure_it_all.data.database.AppDatabase
-import com.example.secure_it_all.model.AlertStatus
-import com.example.secure_it_all.model.AppAlert
 import com.example.secure_it_all.ui.network.NetworkConnectionAdapter
 import com.example.secure_it_all.ui.network.NetworkConnectionViewModel
 import kotlinx.coroutines.launch
@@ -29,39 +27,48 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
+    private val dashboardViewModel: DashboardViewModel by viewModels {
+        object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                val db = AppDatabase.getInstance(requireContext())
+                return DashboardViewModel(db) as T
+            }
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Alerts
-        val alerts = listOf(
-            AppAlert("PhotoBlur Pro", "", AlertStatus.DANGER, "PB"),
-            AppAlert("Fast VPN Free", "", AlertStatus.WARNING, "FV"),
-            AppAlert("Coupon Saver", "", AlertStatus.WARNING, "CS")
-        )
-
         val rvAlerts =
             view.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.rvAlerts)
-
         rvAlerts.layoutManager = LinearLayoutManager(requireContext())
-        rvAlerts.adapter = AppAlertAdapter(alerts)
 
         view.findViewById<android.widget.TextView>(R.id.tvGreeting)
-            .text = "Good morning, user!"
+            .text = "Good morning!"
+
+        val tvAppsWatched = view.findViewById<android.widget.TextView>(R.id.tvAppsWatched)
+        val tvConnections = view.findViewById<android.widget.TextView>(R.id.tvConnections)
+        val tvThreatsBlocked = view.findViewById<android.widget.TextView>(R.id.tvThreatsBlocked)
+        val tvNeedALook = view.findViewById<android.widget.TextView>(R.id.tvNeedALook)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            dashboardViewModel.state.collect { dashState ->
+                tvAppsWatched.text = dashState.monitoredAppsCount.toString()
+                tvConnections.text = dashState.connectionsToday.toString()
+                tvThreatsBlocked.text = dashState.threatsBlocked.toString()
+                tvNeedALook.text = dashState.needALookCount.toString()
+                rvAlerts.adapter = AppAlertAdapter(dashState.alerts)
+            }
+        }
 
         // Network Connections
         val rvConnections =
-            view.findViewById<androidx.recyclerview.widget.RecyclerView>(
-                R.id.rvConnections
-            )
+            view.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.rvConnections)
 
         networkAdapter = NetworkConnectionAdapter()
-
-        rvConnections.layoutManager =
-            LinearLayoutManager(requireContext())
-
+        rvConnections.layoutManager = LinearLayoutManager(requireContext())
         rvConnections.adapter = networkAdapter
 
-        // Observe database
         viewLifecycleOwner.lifecycleScope.launch {
             networkViewModel.connections.collect { connections ->
                 networkAdapter.submitList(connections)
